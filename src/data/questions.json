@@ -1,0 +1,82 @@
+[
+  {
+    "id": 1,
+    "question": "How many muscles does a cat have in each ear?",
+    "options": ["12", "24", "32", "64"],
+    "correctAnswer": "32"
+  },
+  {
+    "id": 2,
+    "question": "What percentage of their lives do cats spend sleeping?",
+    "options": ["30%", "50%", "70%", "90%"],
+    "correctAnswer": "70%"
+  },
+  {
+    "id": 3,
+    "question": "Which of these things can't cats taste?",
+    "options": ["Salt", "Sweetness", "Sourness", "Bitterness"],
+    "correctAnswer": "Sweetness"
+  },
+  {
+    "id": 4,
+    "question": "How high can a cat jump compared to its own height?",
+    "options": ["2 times", "4 times", "6 times", "10 times"],
+    "correctAnswer": "6 times"
+  },
+  {
+    "id": 5,
+    "question": "What is the name of the first cat that traveled to space?",
+    "options": ["Luna", "Félicette", "Bella", "Daisy"],
+    "correctAnswer": "Félicette"
+  },
+  {
+    "id": 6,
+    "question": "Why do cats 'slow blink' at humans?",
+    "options": [
+      "They are sleepy",
+      "It's a sign of trust",
+      "To clean eyes",
+      "To demand food"
+    ],
+    "correctAnswer": "It's a sign of trust"
+  },
+  {
+    "id": 7,
+    "question": "A cat's nose print is as unique as...",
+    "options": [
+      "A human fingerprint",
+      "A zebra's stripes",
+      "A snowflake",
+      "All of the above"
+    ],
+    "correctAnswer": "A human fingerprint"
+  },
+  {
+    "id": 8,
+    "question": "What does it mean when a cat walks with its tail held high and vibrating?",
+    "options": [
+      "It is angry",
+      "It is very happy",
+      "It is scared",
+      "It is hunting"
+    ],
+    "correctAnswer": "It is very happy"
+  },
+  {
+    "id": 9,
+    "question": "How many different sounds can a cat make?",
+    "options": ["About 10", "About 50", "About 100", "Over 500"],
+    "correctAnswer": "About 100"
+  },
+  {
+    "id": 10,
+    "question": "Cats walk like camels and giraffes: they move both...",
+    "options": [
+      "Front legs first",
+      "Back legs first",
+      "Left side then right side",
+      "Opposite legs together"
+    ],
+    "correctAnswer": "Left side then right side"
+  }
+]
