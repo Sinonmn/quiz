@@ -4,7 +4,6 @@ A stylish, interactive quiz for cat lovers! Test your knowledge and enjoy deligh
 
 **🔗 [Live Demo](https://sinonmn.github.io/quiz/)**
 
----
 
 
 
