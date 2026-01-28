@@ -14,7 +14,9 @@ const Quiz = (props) => {
 
       <div className="quiz">
         <h1 className="quiz__title">{questionData.question}</h1>
-        <img className="quiz__img" src={questionData.image} alt="" />
+        <div className="quiz__img ">
+          <img src={questionData.image} alt="" />
+        </div>
         <ul className="quiz__items">
           {questionData.options.map((text) => (
             <li

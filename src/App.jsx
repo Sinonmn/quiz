@@ -9,6 +9,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [quizData, setQuizData] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [score, setScore] = useState(0);
 
   useEffect(() => {
     let isMounted = true;
@@ -41,7 +42,16 @@ function App() {
     };
   }, []);
 
-  const handleNext = () => {
+  const handleNext = (selectedAnswer) => {
+
+    const correctAnswer = quizData[currentIndex].correctAnswer;
+    if (selectedAnswer === correctAnswer) {
+      setScore((prev) => {
+        const newScore = prev + 1;
+        console.log(newScore);
+        return newScore;
+      });
+    }
     setCurrentIndex((prev) => prev + 1);
   };
 
@@ -60,7 +70,10 @@ function App() {
           onClickVariant={handleNext}
         />
       ) : (
-        <Result />
+        <Result 
+		  total = {quizData.length}
+		  score = {score}
+		  />
       )}
     </div>
   );
