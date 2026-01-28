@@ -1,0 +1,19 @@
+.quiz {
+}
+.quiz__img {
+  max-width: 500px;
+  height: auto;
+  width: 100%;
+}
+.quiz__items {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.quiz__item {
+}
+.quiz__title {
+  display: flex;
+  justify-content: center;
+  font-size: 50px;
+}
