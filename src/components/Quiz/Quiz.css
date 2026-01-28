@@ -51,7 +51,8 @@
   width: 100%;
   height: auto;
   max-height: 500px;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  -webkit-box-shadow: 5px 5px 15px -11px #000000;
+  box-shadow: 5px 5px 15px -11px #000000;
 }
 
 .quiz__title {
@@ -79,17 +80,15 @@
   border-radius: 10px;
 }
 
-
 .fade-in {
   animation: fadeInSlide 0.5s ease-out forwards;
 }
-
 
 @keyframes fadeInSlide {
   from {
     opacity: 0;
     transform: translateY(20px);
-    filter: blur(1px); 
+    filter: blur(1px);
   }
   to {
     opacity: 1;
@@ -97,7 +96,6 @@
     filter: blur(0);
   }
 }
-
 
 .quiz__img img {
   transition: opacity 0.3s ease;

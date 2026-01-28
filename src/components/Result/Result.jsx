@@ -1,4 +1,4 @@
-import happyCat from "./img/happyCat.jpg";
+import happyCat from "../../assets/happyCat.jpg";
 import sadCat from "../../assets/sadCat.jpg";
 import "./Result.css";
 

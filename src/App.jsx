@@ -6,12 +6,14 @@ import Quiz from "./components/quiz/quiz.jsx";
 import Result from "./components/result/Result.jsx";
 import LoadingPage from "./pages/loadingPage/LoadingPage.jsx";
 import ErrorPage from "./pages/errorPage/ErrorPage.jsx";
+import FullScreeenFeedback from "./components/FullScreenFeedback/FullScreenFeedback.jsx";
 
 function App() {
   const [loading, setLoading] = useState(false);
   const [quizData, setQuizData] = useState([]);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
+  const [feedback, setFeedback] = useState(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -45,15 +47,23 @@ function App() {
   }, []);
 
   const handleNext = (selectedAnswer) => {
+    if (feedback) return;
     const correctAnswer = quizData[currentIndex].correctAnswer;
-    if (selectedAnswer === correctAnswer) {
+    const isCorrect = selectedAnswer === correctAnswer;
+    if (isCorrect) {
       setScore((prev) => {
         const newScore = prev + 1;
-        console.log(newScore);
         return newScore;
       });
+      setFeedback("correct");
+    } else {
+      setFeedback("incorrect");
     }
-    setCurrentIndex((prev) => prev + 1);
+
+    setTimeout(() => {
+      setFeedback(null);
+      setCurrentIndex((prev) => prev + 1);
+    }, 1200);
   };
 
   const resetQuizButton = () => {
@@ -68,6 +78,7 @@ function App() {
 
   return (
     <div className="App">
+      {feedback && <FullScreeenFeedback type={feedback} />}
       {!isFinished ? (
         <Quiz
           questionData={quizData[currentIndex]}
