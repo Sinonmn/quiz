@@ -5,6 +5,7 @@ import { fetchCatImages } from "./services/catServise.js";
 import Quiz from "./components/quiz/quiz.jsx";
 import Result from "./components/result/Result.jsx";
 import LoadingPage from "./pages/loadingPage/LoadingPage.jsx";
+import ErrorPage from "./pages/errorPage/ErrorPage.jsx";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -63,7 +64,7 @@ function App() {
   const isFinished = currentIndex >= quizData.length;
 
   if (loading && quizData.length === 0) return <LoadingPage />;
-  if (quizData.length === 0 && !loading) return <h1>Error</h1>;
+  if (quizData.length === 0 && !loading) return <ErrorPage />;
 
   return (
     <div className="App">

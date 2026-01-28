@@ -1,4 +1,5 @@
 import happyCat from "./img/happyCat.jpg";
+import sadCat from "../../assets/sadCat.jpg";
 import "./Result.css";
 
 const Result = (props) => {
@@ -12,7 +13,6 @@ const Result = (props) => {
 
   return (
     <div className="result fade-in">
-      
       <div className="result__chart-container">
         <div className="result__chart" style={chartStyle}>
           <div className="result__chart-inner">{percentage}%</div>
@@ -20,7 +20,11 @@ const Result = (props) => {
       </div>
 
       <div className="result__image">
-        <img src={happyCat} alt="Cat" />
+        {percentage > 50 ? (
+          <img src={happyCat} alt="Cat" />
+        ) : (
+          <img src={sadCat} alt="Cat" />
+        )}
       </div>
 
       <p className="result__score">

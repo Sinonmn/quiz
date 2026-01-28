@@ -42,6 +42,8 @@
 }
 .result__image img {
   transition: opacity 0.3s ease;
+  max-width: 400px;
+  width: 100%;
 }
 
 .result__score {
@@ -89,5 +91,14 @@
     opacity: 1;
     transform: translateY(0);
     filter: blur(0);
+  }
+}
+
+@media (max-width: 768.9px) {
+  .result__image {
+    flex: 1 1 100%;
+    margin: 30px 0px;
+    display: flex;
+    justify-content: center;
   }
 }
