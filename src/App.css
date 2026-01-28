@@ -1,7 +1,10 @@
 .App {
-  height: auto;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  min-height: 100dvh;
+  padding: 20px;
+  box-sizing: border-box;
+  text-align: center;
 }
