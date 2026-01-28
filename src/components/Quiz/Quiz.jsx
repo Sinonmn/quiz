@@ -2,17 +2,17 @@ import "./Quiz.css";
 
 const Quiz = (props) => {
   const { step, questionData, total, onClickVariant } = props;
-  const precentage = Math.round((step / total) * 100);
+  const percentage = Math.round((step / total) * 100);
   return (
     <>
       <div className="progress">
         <div
-        // style={{ width: `${percentage}%` }}
-        // className="progress__inner"
+          style={{ width: `${percentage}%` }}
+          className="progress__inner"
         ></div>
       </div>
 
-      <div className="quiz">
+      <div className="quiz fade-in" key={step}>
         <h1 className="quiz__title">{questionData.question}</h1>
         <div className="quiz__img ">
           <img src={questionData.image} alt="" />

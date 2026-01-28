@@ -62,3 +62,43 @@
   font-weight: 700;
   color: #222;
 }
+
+.progress {
+  height: 10px;
+  width: 100%;
+  background-color: #e0e0e0;
+  border-radius: 10px;
+  margin-bottom: 30px;
+  overflow: hidden;
+}
+
+.progress__inner {
+  height: 100%;
+  background: linear-gradient(90deg, #4facfe 0%, #1b7eff 100%);
+  transition: width 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+
+.fade-in {
+  animation: fadeInSlide 0.5s ease-out forwards;
+}
+
+
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(1px); 
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+
+.quiz__img img {
+  transition: opacity 0.3s ease;
+}

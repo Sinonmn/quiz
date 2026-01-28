@@ -1,7 +1,8 @@
 import happyCat from "./img/happyCat.jpg";
 import "./Result.css";
 
-const Result = ({ score, total }) => {
+const Result = (props) => {
+  const { score, total, resetQuizButton } = props;
   const percentage = Math.round((score / total) * 100);
 
   const chartStyle = {
@@ -9,13 +10,9 @@ const Result = ({ score, total }) => {
     "--color": percentage > 50 ? "#4facfe" : "#ff4b2b",
   };
 
-  const resetQuizButton = () => {
-    window.location.reload();
-  };
-
   return (
-    <div className="result">
-      {}
+    <div className="result fade-in">
+      
       <div className="result__chart-container">
         <div className="result__chart" style={chartStyle}>
           <div className="result__chart-inner">{percentage}%</div>

@@ -40,6 +40,9 @@
 .result__image {
   flex: 0 1 50%;
 }
+.result__image img {
+  transition: opacity 0.3s ease;
+}
 
 .result__score {
   margin-top: 40px;
@@ -71,4 +74,20 @@
   color: #007bff;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
   transform: translateY(-1px);
+}
+
+.fade-in {
+  animation: fadeInSlide 0.5s ease-out forwards;
+}
+@keyframes fadeInSlide {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(1px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
 }

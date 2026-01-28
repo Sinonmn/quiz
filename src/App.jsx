@@ -43,7 +43,6 @@ function App() {
   }, []);
 
   const handleNext = (selectedAnswer) => {
-
     const correctAnswer = quizData[currentIndex].correctAnswer;
     if (selectedAnswer === correctAnswer) {
       setScore((prev) => {
@@ -53,6 +52,11 @@ function App() {
       });
     }
     setCurrentIndex((prev) => prev + 1);
+  };
+
+  const resetQuizButton = () => {
+    setCurrentIndex(0);
+    setScore(0);
   };
 
   const isFinished = currentIndex >= quizData.length;
@@ -70,10 +74,11 @@ function App() {
           onClickVariant={handleNext}
         />
       ) : (
-        <Result 
-		  total = {quizData.length}
-		  score = {score}
-		  />
+        <Result
+          total={quizData.length}
+          score={score}
+          resetQuizButton={resetQuizButton}
+        />
       )}
     </div>
   );
