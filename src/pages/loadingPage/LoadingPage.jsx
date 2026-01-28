@@ -9,10 +9,10 @@ const override = {
 
 const LoadingPage = () => {
   let [loading, setLoading] = useState(true);
-  let [color, setColor] = useState("#ffffff");
+  let [color, setColor] = useState("#4facfe");
   return (
     <MoonLoader
-      color="#4facfe"
+      color={color}
       loading={loading}
       cssOverride={override}
       size={150}
