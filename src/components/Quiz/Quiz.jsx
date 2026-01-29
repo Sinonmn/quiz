@@ -1,4 +1,5 @@
 import "./Quiz.css";
+import Img from "../Img/Img.jsx";
 
 const Quiz = (props) => {
   const { step, questionData, total, onClickVariant } = props;
@@ -15,7 +16,7 @@ const Quiz = (props) => {
         <div className="quiz fade-in" key={step}>
           <h1 className="quiz__title">{questionData.question}</h1>
           <div className="quiz__img ">
-            <img src={questionData.image} alt="" />
+            <Img src={questionData.image} alt="" />
           </div>
           <ul className="quiz__items">
             {questionData.options.map((text) => (

@@ -4,9 +4,10 @@ import questions from "./data/questions.json";
 import { fetchCatImages } from "./services/catServise.js";
 import Quiz from "./components/quiz/quiz.jsx";
 import Result from "./components/result/Result.jsx";
-import LoadingPage from "./pages/loadingPage/LoadingPage.jsx";
 import ErrorPage from "./pages/errorPage/ErrorPage.jsx";
 import FullScreeenFeedback from "./components/FullScreenFeedback/FullScreenFeedback.jsx";
+import happyCat from "./assets/happyCat.jpg";
+import sadCat from "./assets/sadCat.jpg";
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -46,6 +47,13 @@ function App() {
     };
   }, []);
 
+  useEffect(() => {
+    [happyCat, sadCat].forEach((src) => {
+      const img = new Image();
+      img.src = src;
+    });
+  }, []);
+
   const handleNext = (selectedAnswer) => {
     if (feedback) return;
     const correctAnswer = quizData[currentIndex].correctAnswer;
@@ -73,7 +81,13 @@ function App() {
 
   const isFinished = currentIndex >= quizData.length;
 
-  if (loading && quizData.length === 0) return <LoadingPage />;
+if (loading && quizData.length === 0) {
+  return (
+    <div className="pre-react-loader">
+      <div class="loader-circle"></div>
+    </div>
+  );
+}
   if (quizData.length === 0 && !loading) return <ErrorPage />;
 
   return (
