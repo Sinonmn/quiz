@@ -6,10 +6,10 @@ const Img = ({ src, alt }) => {
   const [aspectRatio, setAspectRatio] = useState(16 / 9);
 
   useEffect(() => {
-    // 1. Включаем загрузку при смене URL
+    
     setIsLoading(true);
 
-    let isMounted = true; // Флаг, чтобы не обновлять стейт размонтированного компонента
+    let isMounted = true; 
     const img = new Image();
     img.src = src;
 
@@ -27,7 +27,7 @@ const Img = ({ src, alt }) => {
     };
 
     return () => {
-      isMounted = false; // "Затыкаем" старый запрос при смене src
+      isMounted = false; 
       img.onload = null;
       img.onerror = null;
     };
@@ -36,13 +36,13 @@ const Img = ({ src, alt }) => {
   return (
     <div
       className="img-wrapper"
-      style={{ aspectRatio: `${aspectRatio}` }} // Передаем как строку или число
+      style={{ aspectRatio: `${aspectRatio}` }} 
     >
       {isLoading && <div className="skeleton"></div>}
       <img
         src={src}
         alt={alt}
-        // Убираем onLoad отсюда, так как мы уже обработали его в useEffect
+   
         className={`img-content ${isLoading ? "is-hidden" : "is-visible"}`}
       />
     </div>
