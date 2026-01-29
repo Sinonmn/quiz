@@ -6,7 +6,6 @@ import ErrorPage from "./pages/errorPage/ErrorPage.jsx";
 import App from "./App.jsx";
 import Main from "./pages/Main/Main.jsx";
 
-
 const router = createBrowserRouter([
   {
     path: "/",
@@ -17,6 +16,9 @@ const router = createBrowserRouter([
     path: "/quiz",
     element: <App />,
     errorElement: <ErrorPage />,
+  },
+  {
+    basename: import.meta.env.DEV ? "/" : "/quiz",
   },
 ]);
 
