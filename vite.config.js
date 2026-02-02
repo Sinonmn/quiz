@@ -1,10 +1,8 @@
 import { defineConfig } from "vite";
-import react from "@vitejs/api-react";
+import react from "@vitejs/plugin-react";
 
-export default defineConfig(({ command }) => {
-  return {
-    plugins: [react()],
-
-    base: command === "serve" ? "/" : "/quiz/",
-  };
-});
+export default defineConfig(({ command }) => ({
+  plugins: [react()],
+ 
+  base: process.env.NODE_ENV === "production" ? "/quiz/" : "/",
+}));

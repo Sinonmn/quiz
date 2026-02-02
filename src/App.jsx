@@ -3,7 +3,7 @@ import "./reset.css";
 import questions from "./data/questions.json";
 import { fetchCatImages } from "./services/catServise.js";
 import Quiz from "./components/quiz/quiz.jsx";
-import Result from "./components/result/Result.jsx";
+import Result from "./components/Result/Result.jsx";
 import ErrorPage from "./pages/errorPage/ErrorPage.jsx";
 import FullScreeenFeedback from "./components/FullScreenFeedback/FullScreenFeedback.jsx";
 import happyCat from "./assets/happyCat.jpg";
@@ -81,13 +81,13 @@ function App() {
 
   const isFinished = currentIndex >= quizData.length;
 
-if (loading && quizData.length === 0) {
-  return (
-    <div className="pre-react-loader">
-      <div class="loader-circle"></div>
-    </div>
-  );
-}
+  if (loading && quizData.length === 0) {
+    return (
+      <div className="pre-react-loader">
+        <div class="loader-circle"></div>
+      </div>
+    );
+  }
   if (quizData.length === 0 && !loading) return <ErrorPage />;
 
   return (

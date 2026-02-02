@@ -8,20 +8,19 @@ import Main from "./pages/Main/Main.jsx";
 
 const router = createBrowserRouter([
   {
-    path: "/",
+    path: "/", 
     element: <Main />,
     errorElement: <ErrorPage />,
   },
   {
-    path: "/quiz",
+    path: "/quiz", 
     element: <App />,
     errorElement: <ErrorPage />,
   },
-  {
-    basename: import.meta.env.DEV ? "/" : "/quiz",
-  },
-]);
-
+], {
+ 
+  basename: import.meta.env.DEV ? "/" : "/quiz",
+});
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RouterProvider router={router} />
