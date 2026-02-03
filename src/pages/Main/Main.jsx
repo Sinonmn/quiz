@@ -4,7 +4,6 @@ import "./Main.css";
 import { Link } from "react-router";
 import Slider from "../../components/Slider/Slider.jsx";
 
-
 const Main = () => {
   return (
     <>
@@ -16,7 +15,7 @@ const Main = () => {
             <Link className="main-content__link" to="/quiz">
               Cat Quiz
             </Link>
-            <Link className="main-content__link" to="/">
+            <Link className="main-content__link" to="/createQuiz">
               Create Your Own Quiz
             </Link>
           </div>

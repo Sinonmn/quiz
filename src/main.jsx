@@ -5,22 +5,24 @@ import "./index.css";
 import ErrorPage from "./pages/errorPage/ErrorPage.jsx";
 import App from "./App.jsx";
 import Main from "./pages/Main/Main.jsx";
+import CreateQuiz from "./pages/CreateQuiz/CreateQuiz.jsx";
 
-const router = createBrowserRouter([
+const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      errorElement: <ErrorPage />,
+      children: [
+        { path: "/", element: <Main /> },
+        { path: "/quiz", element: <App /> },
+        { path: "/createQuiz", element: <CreateQuiz /> },
+      ],
+    },
+  ],
   {
-    path: "/", 
-    element: <Main />,
-    errorElement: <ErrorPage />,
+    basename: import.meta.env.DEV ? "/" : "/quiz",
   },
-  {
-    path: "/quiz", 
-    element: <App />,
-    errorElement: <ErrorPage />,
-  },
-], {
- 
-  basename: import.meta.env.DEV ? "/" : "/quiz",
-});
+);
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <RouterProvider router={router} />
