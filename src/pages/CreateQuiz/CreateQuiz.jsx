@@ -1,12 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router";
 import "./CreateQuiz.css";
 
 const CreateQuiz = () => {
+  const navigate = useNavigate();
   const [slides, setSlides] = useState([
     { id: Date.now(), question: "", options: ["", ""], correctAnswer: null },
   ]);
 
   const [currectSlideIndex, setCurrentSlideIndex] = useState(0);
+  const [isSending, setIsSending] = useState(false);
 
   const currentSlide = slides[currectSlideIndex];
 
@@ -58,6 +61,46 @@ const CreateQuiz = () => {
     const current = updatedSlides[currectSlideIndex];
     current.correctAnswer = current.correctAnswer === index ? null : index;
     setSlides(updatedSlides);
+  };
+
+  const handleCreateQuiz = async () => {
+    if (isSending) return;
+    setIsSending(true);
+    try {
+      console.log("handleCreateQuiz start");
+      const response = await fetch("http://localhost:3001/api/send", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ slides }),
+      });
+      console.log(
+        "fetch finished, status",
+        response.status,
+        response.statusText,
+      );
+      const text = await response.text();
+      console.log("raw text:", text);
+      let data;
+      try {
+        data = JSON.parse(text);
+      } catch (e) {
+        console.error("Failed to parse JSON response", e);
+        throw new Error("Invalid JSON response from server");
+      }
+
+      if (data.id) {
+        console.log("POST response:", data);
+        console.log("Navigate to:", `/quiz/${data.id}`);
+        window.location.href = `/quiz/${data.id}`;
+      } else {
+        console.warn("Server replied without id", data);
+      }
+    } catch (err) {
+      console.error("Ошибка отправки:", err);
+      alert("Ошибка отправки: " + err.message);
+    } finally {
+      setIsSending(false);
+    }
   };
 
   return (
@@ -115,7 +158,14 @@ const CreateQuiz = () => {
               )}
             </div>
           </form>
-          <button className="button-create-quiz">Create Quiz</button>
+          <button
+            type="button"
+            className="button-create-quiz"
+            onClick={handleCreateQuiz}
+            disabled={isSending}
+          >
+            {isSending ? "Creating..." : "Create Quiz"}
+          </button>
         </main>
       </div>
     </>
