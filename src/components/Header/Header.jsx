@@ -13,7 +13,7 @@ export default function Header() {
           <Link to="/quiz" className="header__link">
             Cat Quiz
           </Link>
-          <Link to="/quiz" className="header__link">
+          <Link to="/createQuiz" className="header__link">
             Create Quiz
           </Link>
         </nav>
