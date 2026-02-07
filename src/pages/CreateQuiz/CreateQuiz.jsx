@@ -86,13 +86,13 @@ const CreateQuiz = () => {
 
     setSlides(updatedSlides);
   };
-
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
   const handleCreateQuiz = async () => {
     if (isSending) return;
     setIsSending(true);
     try {
       console.log("handleCreateQuiz start");
-      const response = await fetch("http://localhost:3001/api/send", {
+      const response = await fetch(`${API_URL}/api/send`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ slides }),
@@ -121,7 +121,7 @@ const CreateQuiz = () => {
         console.warn("Server replied without id", data);
       }
     } catch (err) {
-      alert( err.message);
+      alert(err.message);
     } finally {
       setIsSending(false);
     }

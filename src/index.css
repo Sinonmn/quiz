@@ -1,29 +1,35 @@
-:root {
-  overflow-y: auto !important;
-
-  ::-webkit-scrollbar {
-    width: 8px;
-    height: 8px;
-  }
-  ::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  ::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
-    border-radius: 20px;
-    border: 2px solid transparent;
-    background-clip: content-box;
-  }
-  ::-webkit-scrollbar-thumb:hover {
-    background-color: rgba(0, 0, 0, 0.4);
-  }
-}
-html,
-body {
-  max-width: 100%;
-  overflow: hidden;
+/* 1. Стили скроллбара пишем отдельно, не вкладывая в :root */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
 }
 
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  border-radius: 20px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(0, 0, 0, 0.4);
+}
+
+/* 2. Исправляем базу */
 html {
   scroll-behavior: smooth;
+  /* Принудительно разрешаем скролл */
+  overflow-y: scroll !important;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  /* Убираем жесткое ограничение по высоте, если оно мешает */
+  min-height: 100vh;
+  position: relative;
 }

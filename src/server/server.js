@@ -1,51 +1,52 @@
-
-
-import express from "express";
-import cors from "cors";
+const express = require("express");
+const cors = require("cors");
 
 const app = express();
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 8000;
 
 app.use(cors());
 app.use(express.json());
 
-
 app.use((req, res, next) => {
   console.log(`-> ${req.method} ${req.url}`);
-  if (req.url === "/api/send") {
-    console.log("  headers:", req.headers);
-  }
   next();
 });
 
-const quizes = {};
+let quizes = {};
 
-app.options("/api/send", (req, res) => {
-  console.log("-> OPTIONS /api/send (preflight)");
-  console.log("  headers:", req.headers);
-  res.sendStatus(204);
+app.get("/", (req, res) => {
+  res.send("Server is running!");
 });
 
 app.post("/api/send", (req, res) => {
-  const id = Date.now().toString();
-  console.log("-> POST /api/send body:", req.body);
-  console.log("  headers:", req.headers);
-  quizes[id] = req.body.slides || req.body;
+  try {
+    const id = Date.now().toString();
 
-  res.json({ status: "ok", id, received: req.body });
+    if (!req.body || !req.body.slides) {
+      return res.status(400).json({ error: "No slides provided" });
+    }
+
+    quizes[id] = req.body.slides;
+    console.log(`-> Saved quiz with id: ${id}`);
+
+    res.json({ status: "ok", id });
+  } catch (err) {
+    console.error("Error saving quiz:", err);
+    res.status(500).json({ error: "Internal server error" });
+  }
 });
 
 app.get("/api/quiz/:id", (req, res) => {
   const quizId = req.params.id;
   const quiz = quizes[quizId];
+
   if (quiz) {
-    res.setHeader("X-Quiz-Server", "local-3001");
     res.json(quiz);
   } else {
     res.status(404).json({ error: "Quiz not found" });
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT} (pid=${process.pid})`);
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server is running on port ${PORT}`);
 });

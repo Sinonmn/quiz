@@ -3,6 +3,7 @@ import { useParams } from "react-router";
 import Quiz from "../../components/Quiz/Quiz.jsx";
 import Result from "../../components/Result/Result.jsx";
 import FullScreeenFeedback from "../../components/FullScreenFeedback/FullScreenFeedback.jsx";
+import ErrorPage from "../errorPage/ErrorPage.jsx";
 
 const QuizPage = () => {
   const { id } = useParams();
@@ -31,9 +32,9 @@ const QuizPage = () => {
     setCurrentIndex(0);
     setScore(0);
   };
-
+  const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
   useEffect(() => {
-    fetch(`http://127.0.0.1:3001/api/quiz/${id}`)
+    fetch(`${API_URL}/api/quiz/${id}`)
       .then((res) => {
         if (!res.ok) throw new Error("Квиз не найден");
         return res.json();
@@ -60,9 +61,9 @@ const QuizPage = () => {
       >
         Quiz ID: {id}
       </h1>
-		{feedback && <FullScreeenFeedback type={feedback}  />}
+      {feedback && <FullScreeenFeedback type={feedback} />}
       {!isFinished ? (
-        <Quiz 
+        <Quiz
           hasImage={false}
           questionData={quizData[currentIndex]}
           total={quizData.length}
