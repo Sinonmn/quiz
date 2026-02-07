@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import "./reset.css";
 import questions from "./data/questions.json";
 import { fetchCatImages } from "./services/catServise.js";
-import Quiz from "./components/quiz/quiz.jsx";
+import Quiz from "./components/Quiz/Quiz.jsx";
 import Result from "./components/Result/Result.jsx";
 import ErrorPage from "./pages/errorPage/ErrorPage.jsx";
 import FullScreeenFeedback from "./components/FullScreenFeedback/FullScreenFeedback.jsx";
@@ -84,10 +84,14 @@ function App() {
   if (loading && quizData.length === 0) {
     return (
       <div className="pre-react-loader">
-        <div class="loader-circle"></div>
+        <div className="loader-circle"></div>
       </div>
     );
   }
+  if (quizData.length === 0 && !loading) return <ErrorPage />;
+  console.log("Состояние App:", { loading, dataLength: quizData.length });
+
+
   if (quizData.length === 0 && !loading) return <ErrorPage />;
 
   return (
@@ -95,6 +99,7 @@ function App() {
       {feedback && <FullScreeenFeedback type={feedback} />}
       {!isFinished ? (
         <Quiz
+          hasImg={true}
           questionData={quizData[currentIndex]}
           total={quizData.length}
           step={currentIndex}

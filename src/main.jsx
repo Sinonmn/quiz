@@ -6,6 +6,7 @@ import ErrorPage from "./pages/errorPage/ErrorPage.jsx";
 import Main from "./pages/Main/Main.jsx";
 import CreateQuiz from "./pages/CreateQuiz/CreateQuiz.jsx";
 import QuizPage from "./pages/QuizPage/QuizPage.jsx";
+import App from "./App.jsx";
 
 const router = createBrowserRouter(
   [
@@ -15,7 +16,7 @@ const router = createBrowserRouter(
       children: [
         { path: "/", element: <Main /> },
         { path: "/createQuiz", element: <CreateQuiz /> },
-        { path: "/quiz", element: <QuizPage /> },
+        { path: "/quiz", element: <App /> },
         { path: "/quiz/:id", element: <QuizPage /> },
       ],
     },

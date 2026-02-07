@@ -45,21 +45,45 @@ const CreateQuiz = () => {
   };
 
   const updateOptionText = (optionIndex, text) => {
-    const updatedSlides = [...slides];
-    const newOptions = [...updatedSlides[currectSlideIndex].options];
-    newOptions[optionIndex] = text;
+    const updatedSlides = slides.map((slide, idx) => {
+      if (idx === currectSlideIndex) {
+        const newOptions = [...slide.options];
+        const oldText = newOptions[optionIndex];
+        newOptions[optionIndex] = text;
 
-    updatedSlides[currectSlideIndex] = {
-      ...updatedSlides[currectSlideIndex],
-      options: newOptions,
-    };
+        let newCorrectAnswer = slide.correctAnswer;
+        if (slide.correctAnswer === oldText && oldText !== "") {
+          newCorrectAnswer = text;
+        }
+
+        return {
+          ...slide,
+          options: newOptions,
+          correctAnswer: newCorrectAnswer,
+        };
+      }
+      return slide;
+    });
+
     setSlides(updatedSlides);
   };
-
   const toggleCorrectAnswer = (index) => {
-    const updatedSlides = [...slides];
-    const current = updatedSlides[currectSlideIndex];
-    current.correctAnswer = current.correctAnswer === index ? null : index;
+    const textAtThisIndex = currentSlide.options[index];
+
+    if (!textAtThisIndex) return;
+
+    const updatedSlides = slides.map((slide, idx) => {
+      if (idx === currectSlideIndex) {
+        return {
+          ...slide,
+
+          correctAnswer:
+            slide.correctAnswer === textAtThisIndex ? null : textAtThisIndex,
+        };
+      }
+      return slide;
+    });
+
     setSlides(updatedSlides);
   };
 
@@ -83,6 +107,7 @@ const CreateQuiz = () => {
       let data;
       try {
         data = JSON.parse(text);
+        console.log("parsed JSON:", data);
       } catch (e) {
         console.error("Failed to parse JSON response", e);
         throw new Error("Invalid JSON response from server");
@@ -96,13 +121,11 @@ const CreateQuiz = () => {
         console.warn("Server replied without id", data);
       }
     } catch (err) {
-      console.error("Ошибка отправки:", err);
-      alert("Ошибка отправки: " + err.message);
+      alert( err.message);
     } finally {
       setIsSending(false);
     }
   };
-
   return (
     <>
       <div className="quiz-creator ">
@@ -137,7 +160,7 @@ const CreateQuiz = () => {
                 <div key={index} className="option-wrapper">
                   <button
                     type="button"
-                    className={`correct-indicator ${currentSlide.correctAnswer === index ? "correct" : ""}`}
+                    className={`correct-indicator ${currentSlide.correctAnswer === option && option !== "" ? "correct" : ""}`}
                     onClick={() => toggleCorrectAnswer(index)}
                   >
                     ✔
