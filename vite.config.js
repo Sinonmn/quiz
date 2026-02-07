@@ -3,6 +3,6 @@ import react from "@vitejs/plugin-react";
 
 export default defineConfig(({ command }) => ({
   plugins: [react()],
- 
-  base: process.env.NODE_ENV === "production" ? "/quiz/" : "/",
+
+  base: "/",
 }));
