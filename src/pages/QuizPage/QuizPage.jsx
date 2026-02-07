@@ -62,7 +62,7 @@ const QuizPage = () => {
       </h1>
 		{feedback && <FullScreeenFeedback type={feedback}  />}
       {!isFinished ? (
-        <Quiz
+        <Quiz 
           hasImage={false}
           questionData={quizData[currentIndex]}
           total={quizData.length}

@@ -1,5 +1,6 @@
 import "./Quiz.css";
 import Img from "../Img/Img.jsx";
+import catImg from "../../assets/сatsPictures/2.jpg";
 const Quiz = (props) => {
   const { step, questionData, total, onClickVariant, hasImg } = props;
 
@@ -19,11 +20,15 @@ const Quiz = (props) => {
         <h1 className="quiz__title">{questionData.question}</h1>
 
         {}
-        {(hasImg || questionData.image) && (
+        {hasImg ? (
           <Img src={questionData.image} alt={questionData.question} />
+        ) : (
+          <div className="basic-img-wrapper">
+            <img src={catImg} />
+          </div>
         )}
 
-        <ul className="quiz__items">
+        <ul className={`quiz__items`}>
           {questionData.options.map((text, index) => (
             <li
               className="quiz__item"

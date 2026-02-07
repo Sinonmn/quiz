@@ -7,15 +7,12 @@ export default function Header() {
       <div className="header__container">
         <Link to="/" className="header__logo">
           <img
-            src="../../../public/favicon.png"
+            src="../../assets/logo/favicon.png"
             alt="Logo"
             className="header__logo-img"
           />
         </Link>
         <nav className="header__nav">
-          <Link to="/" className="header__link">
-            Main
-          </Link>
           <Link to="/quiz" className="header__link">
             Cat Quiz
           </Link>
