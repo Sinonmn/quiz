@@ -1,4 +1,4 @@
-**🔗 [Live Demo](https://polite-twilight-30ef71.netlify.app/)**
+**🔗 [Live Demo](https://quiz-ashen-pi.vercel.app/)**
 
 ---
 
