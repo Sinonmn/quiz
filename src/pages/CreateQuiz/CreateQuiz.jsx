@@ -180,15 +180,15 @@ const CreateQuiz = () => {
                 </button>
               )}
             </div>
+            <button
+              type="button"
+              className="button-create-quiz"
+              onClick={handleCreateQuiz}
+              disabled={isSending}
+            >
+              {isSending ? "Creating..." : "Create Quiz"}
+            </button>
           </form>
-          <button
-            type="button"
-            className="button-create-quiz"
-            onClick={handleCreateQuiz}
-            disabled={isSending}
-          >
-            {isSending ? "Creating..." : "Create Quiz"}
-          </button>
         </main>
       </div>
     </>

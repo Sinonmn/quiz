@@ -149,6 +149,12 @@ form {
   color: #999;
   transition: all 0.4s ease-out;
 }
+.button-create-quiz {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin: 20px auto;
+}
 .add-option-button:hover {
   border-color: #787;
   color: #787;
@@ -167,4 +173,45 @@ form {
 }
 .button-create-quiz:hover {
   background-color: #5a5;
+}
+
+@media (max-width: 1147px) {
+  .quiz-creator {
+    flex-direction: column;
+    background: none;
+  }
+  .quiz-creator__editor {
+    background-color: #f5f5f7;
+  }
+  .sidebar {
+    width: 500px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    max-height: 350px;
+    flex: 1 1 100%;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    overflow-x: auto;
+  }
+  .preview-box {
+    height: 50px;
+    font-size: 10px;
+  }
+  .slide-preview {
+    flex-direction: column;
+    align-items: center;
+    min-width: 80px;
+  }
+  .slide-preview span {
+    max-width: none;
+    width: auto;
+  }
+  .preview-box {
+    height: 40px;
+    font-size: 8px;
+  }
+  .button-create-quiz {
+    margin-top: 30px;
+  }
 }
