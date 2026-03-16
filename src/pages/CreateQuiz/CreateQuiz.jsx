@@ -1,12 +1,13 @@
 import { useState } from "react";
-import { useNavigate } from "react-router";
+import toast, { Toaster } from "react-hot-toast";
 import "./CreateQuiz.css";
+import "react-responsive-modal/styles.css";
 
 const CreateQuiz = () => {
-  const navigate = useNavigate();
   const [slides, setSlides] = useState([
     { id: Date.now(), question: "", options: ["", ""], correctAnswer: null },
   ]);
+  const [open, setOpen] = useState(false);
 
   const [currectSlideIndex, setCurrentSlideIndex] = useState(0);
   const [isSending, setIsSending] = useState(false);
@@ -86,8 +87,37 @@ const CreateQuiz = () => {
 
     setSlides(updatedSlides);
   };
+  const isQuizValid = slides.every((slide) => {
+    const hasQuestion = slide.question.trim() !== "";
+    const hasAtLeastTwoOptions =
+      slide.options.filter((opt) => opt.trim() !== "").length >= 2;
+    const hasCorrectAnswer =
+      slide.correctAnswer !== null && slide.correctAnswer !== "";
+
+    return hasQuestion && hasAtLeastTwoOptions && hasCorrectAnswer;
+  });
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
   const handleCreateQuiz = async () => {
+    if (!isQuizValid) {
+      if (!isQuizValid) {
+        toast.error("Check your slides! Missing question or correct answer.", {
+          duration: 3000,
+          position: "top-right",
+
+          style: {
+            backgroundColor: "#ff4b4b",
+            color: "#fff",
+            fontWeight: "bold",
+            borderRadius: "8px",
+          },
+          iconTheme: {
+            primary: "#fff",
+            secondary: "#ff4b4b",
+          },
+        });
+        return;
+      }
+    }
     if (isSending) return;
     setIsSending(true);
     try {
@@ -128,6 +158,7 @@ const CreateQuiz = () => {
   };
   return (
     <>
+      <Toaster />
       <div className="quiz-creator ">
         <aside className="quiz-creator__sidebar sidebar">
           <button onClick={addSlide} className="add-slide-button">
