@@ -1,7 +1,6 @@
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import "./CreateQuiz.css";
-import "react-responsive-modal/styles.css";
 
 const CreateQuiz = () => {
   const [slides, setSlides] = useState([
