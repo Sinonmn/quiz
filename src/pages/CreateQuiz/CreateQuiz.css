@@ -69,6 +69,8 @@ form {
   justify-content: center;
   font-size: 10px;
   color: #666;
+  overflow-wrap: break-word;
+  word-break: break-word;
 }
 
 .option-wrapper {
