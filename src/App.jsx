@@ -10,49 +10,37 @@ import happyCat from "./assets/happyCat.jpg";
 import sadCat from "./assets/sadCat.jpg";
 
 function App() {
-  const [loading, setLoading] = useState(false);
-  const [quizData, setQuizData] = useState([]);
+  const [quizData, setQuizData] = useState(questions);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [score, setScore] = useState(0);
   const [feedback, setFeedback] = useState(null);
+  const [catUrls, setCatUrls] = useState([]);
 
   useEffect(() => {
     let isMounted = true;
-
-    const prepareQuiz = async () => {
-      if (quizData.length > 0) return;
-
-      setLoading(true);
-      try {
-        const images = await fetchCatImages();
-
-        if (isMounted) {
-          const combinedData = questions.map((question, index) => ({
-            ...question,
-            image: images[index].url,
-          }));
-          setQuizData(combinedData);
-        }
-      } catch (error) {
-        console.error("error", error);
-      } finally {
-        if (isMounted) setLoading(false);
+    const loadImages = async () => {
+      const images = await fetchCatImages();
+      if (isMounted && images.length > 0) {
+        setCatUrls(images.map((img) => img.url));
       }
     };
-
-    prepareQuiz();
-
+    loadImages();
     return () => {
       isMounted = false;
     };
   }, []);
 
   useEffect(() => {
+    const nextIndex = currentIndex + 1;
+    if (catUrls[nextIndex]) {
+      const img = new Image();
+      img.src = catUrls[nextIndex];
+    }
     [happyCat, sadCat].forEach((src) => {
       const img = new Image();
       img.src = src;
     });
-  }, []);
+  }, [currentIndex, catUrls]);
 
   const handleNext = (selectedAnswer) => {
     if (feedback) return;
@@ -81,26 +69,29 @@ function App() {
 
   const isFinished = currentIndex >= quizData.length;
 
-  if (loading && quizData.length === 0) {
+  if (!quizData || quizData.length === 0) {
+    return <ErrorPage />;
+  }
+  console.log("current cat", catUrls[currentIndex]);
+  if (catUrls.length === 0) {
     return (
       <div className="pre-react-loader">
         <div className="loader-circle"></div>
       </div>
     );
   }
-  if (quizData.length === 0 && !loading) return <ErrorPage />;
-  console.log("Состояние App:", { loading, dataLength: quizData.length });
-
-
-  if (quizData.length === 0 && !loading) return <ErrorPage />;
 
   return (
     <div className="App">
       {feedback && <FullScreeenFeedback type={feedback} />}
       {!isFinished ? (
         <Quiz
+          key={currentIndex}
           hasImg={true}
-          questionData={quizData[currentIndex]}
+          questionData={{
+            ...quizData[currentIndex],
+            image: catUrls[currentIndex] || null,
+          }}
           total={quizData.length}
           step={currentIndex}
           onClickVariant={handleNext}

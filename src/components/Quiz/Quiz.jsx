@@ -21,7 +21,7 @@ const Quiz = (props) => {
 
         {}
         {hasImg ? (
-          <Img src={questionData.image} alt={questionData.question} />
+          <Img src={questionData.image} />
         ) : (
           <div className="basic-img-wrapper">
             <img src={catImg} />
