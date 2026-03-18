@@ -1,6 +1,8 @@
 import { useState } from "react";
 import toast, { Toaster } from "react-hot-toast";
 import "./CreateQuiz.css";
+import Header from "../../components/Header/Header";
+import Footer from "../../components/Footer/Footer";
 
 const CreateQuiz = () => {
   const [slides, setSlides] = useState([
@@ -158,6 +160,7 @@ const CreateQuiz = () => {
   return (
     <>
       <Toaster />
+      <Header />
       <div className="quiz-creator ">
         <aside className="quiz-creator__sidebar sidebar">
           <button onClick={addSlide} className="add-slide-button">
@@ -221,6 +224,7 @@ const CreateQuiz = () => {
           </form>
         </main>
       </div>
+      <Footer />
     </>
   );
 };

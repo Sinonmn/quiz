@@ -4,7 +4,6 @@ import "./Main.css";
 import { Link } from "react-router";
 import Slider from "../../components/Slider/Slider.jsx";
 import { useState } from "react";
-import toast, { Toaster } from "react-hot-toast";
 
 const Main = () => {
   const [quizId, setQuizId] = useState("");
@@ -12,28 +11,10 @@ const Main = () => {
   const navigateToQuiz = (event) => {
     event.preventDefault();
     const trimmedId = quizId.trim();
-    if (!trimmedId) {
-      toast.error("Check your slides! Missing question or correct answer.", {
-        duration: 3000,
-        position: "top-right",
-
-        style: {
-          backgroundColor: "#ff4b4b",
-          color: "#fff",
-          fontWeight: "bold",
-          borderRadius: "8px",
-        },
-        iconTheme: {
-          primary: "#fff",
-          secondary: "#ff4b4b",
-        },
-      });
-    }
     window.location.href = `https://quiz-ashen-pi.vercel.app/quiz/${trimmedId}`;
   };
   return (
     <>
-      <Toaster />
       <div className="app-container">
         <Header />
         <main className="main">
