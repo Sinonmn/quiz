@@ -1,3 +1,4 @@
+import { memo } from "react";
 import "./Footer.css";
 import discordIcon from "../../assets/media/discord.svg";
 import telegramIcon from "../../assets/media/telegram-svgrepo-com.svg";
@@ -8,7 +9,7 @@ const SOCIALS = [
   {
     id: 1,
     name: "Discord",
-    href: "discordapp.com/users/566135632821354496",
+    href: "https://discordapp.com/users/566135632821354496",
     icon: discordIcon,
   },
   {
@@ -31,9 +32,10 @@ const SOCIALS = [
   },
 ];
 
-export default function Footer() {
+
+const Footer = memo(({ className }) => {
   return (
-    <footer className="footer">
+    <footer className={`footer ${className || ""}`}>
       <ul className="footer__social-list">
         {SOCIALS.map(({ id, name, href, icon }) => (
           <li className="footer__social-item" key={id}>
@@ -45,4 +47,6 @@ export default function Footer() {
       </ul>
     </footer>
   );
-}
+});
+
+export default Footer;

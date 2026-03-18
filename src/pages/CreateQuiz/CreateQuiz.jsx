@@ -159,72 +159,74 @@ const CreateQuiz = () => {
   };
   return (
     <>
-      <Toaster />
-      <Header />
-      <div className="quiz-creator ">
-        <aside className="quiz-creator__sidebar sidebar">
-          <button onClick={addSlide} className="add-slide-button">
-            +
-          </button>
-          <div className="sidebar__slides-list">
-            {slides.map((slide, index) => (
-              <div
-                className={`slide-preview ${index === currectSlideIndex ? "active" : ""}`}
-                onClick={() => setCurrentSlideIndex(index)}
-                key={`${slide}-${index}`}
-              >
-                <span>{index + 1}</span>
-                <div className="preview-box">{slide.question || "Empty"}</div>
-              </div>
-            ))}
-          </div>
-        </aside>
-        <main className="quiz-creator__editor">
-          <form onSubmit={(e) => e.preventDefault()}>
-            <input
-              type="text"
-              placeholder="Put your question here..."
-              value={currentSlide.question}
-              onChange={(e) => updateQuestion(e.target.value)}
-              className="question-input"
-            />
-            <div className="options-grid">
-              {currentSlide.options.map((option, index) => (
-                <div key={index} className="option-wrapper">
-                  <button
-                    type="button"
-                    className={`correct-indicator ${currentSlide.correctAnswer === option && option !== "" ? "correct" : ""}`}
-                    onClick={() => toggleCorrectAnswer(index)}
-                  >
-                    ✔
-                  </button>
-                  <input
-                    type="text"
-                    placeholder={`Option ${index + 1}`}
-                    value={option}
-                    onChange={(e) => updateOptionText(index, e.target.value)}
-                    className="option-input"
-                  />
+      <div className="app-container">
+        <Toaster />
+        <Header />
+        <div className="quiz-creator ">
+          <aside className="quiz-creator__sidebar sidebar">
+            <button onClick={addSlide} className="add-slide-button">
+              +
+            </button>
+            <div className="sidebar__slides-list">
+              {slides.map((slide, index) => (
+                <div
+                  className={`slide-preview ${index === currectSlideIndex ? "active" : ""}`}
+                  onClick={() => setCurrentSlideIndex(index)}
+                  key={`${slide}-${index}`}
+                >
+                  <span>{index + 1}</span>
+                  <div className="preview-box">{slide.question || "Empty"}</div>
                 </div>
               ))}
-              {currentSlide.options.length < 4 && (
-                <button className="add-option-button" onClick={addOption}>
-                  Add Option
-                </button>
-              )}
             </div>
-            <button
-              type="button"
-              className="button-create-quiz"
-              onClick={handleCreateQuiz}
-              disabled={isSending}
-            >
-              {isSending ? "Creating..." : "Create Quiz"}
-            </button>
-          </form>
-        </main>
+          </aside>
+          <main className="quiz-creator__editor">
+            <form onSubmit={(e) => e.preventDefault()}>
+              <input
+                type="text"
+                placeholder="Put your question here..."
+                value={currentSlide.question}
+                onChange={(e) => updateQuestion(e.target.value)}
+                className="question-input"
+              />
+              <div className="options-grid">
+                {currentSlide.options.map((option, index) => (
+                  <div key={index} className="option-wrapper">
+                    <button
+                      type="button"
+                      className={`correct-indicator ${currentSlide.correctAnswer === option && option !== "" ? "correct" : ""}`}
+                      onClick={() => toggleCorrectAnswer(index)}
+                    >
+                      ✔
+                    </button>
+                    <input
+                      type="text"
+                      placeholder={`Option ${index + 1}`}
+                      value={option}
+                      onChange={(e) => updateOptionText(index, e.target.value)}
+                      className="option-input"
+                    />
+                  </div>
+                ))}
+                {currentSlide.options.length < 4 && (
+                  <button className="add-option-button" onClick={addOption}>
+                    Add Option
+                  </button>
+                )}
+              </div>
+              <button
+                type="button"
+                className="button-create-quiz"
+                onClick={handleCreateQuiz}
+                disabled={isSending}
+              >
+                {isSending ? "Creating..." : "Create Quiz"}
+              </button>
+            </form>
+          </main>
+        </div>
+        <Footer  className='footer--quiz-editor'/>
       </div>
-      <Footer />
     </>
   );
 };

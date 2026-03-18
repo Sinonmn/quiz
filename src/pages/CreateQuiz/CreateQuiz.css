@@ -1,23 +1,20 @@
-.correct-indicator:hover {
-  background-color: #388e3c;
+/* --- Global Container --- */
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh; /* Ensures the page is at least full screen height */
 }
 
+/* --- Main Layout Section --- */
 .quiz-creator {
   display: flex;
-  height: 100vh;
   background: #f5f5f7;
   font-family: -apple-system, sans-serif;
-  flex-wrap: wrap;
-  max-height: 100%;
   overflow: hidden;
-}
-.correct {
-  background-color: #787 !important;
+  flex: 1; /* Occupies all available space between header and footer */
 }
 
-form {
-  flex: 0 0 100%;
-}
+/* --- Sidebar Section --- */
 .sidebar {
   width: 250px;
   background: #fff;
@@ -25,8 +22,8 @@ form {
   padding: 20px;
   display: flex;
   flex-direction: column;
-  max-height: 100vh;
   overflow-y: auto;
+  height: calc(100vh - 120px);
 }
 
 .add-slide-button {
@@ -44,17 +41,8 @@ form {
   flex-grow: 1;
   overflow-y: auto;
 }
-@media (max-width: 1147px) {
-  .sidebar__slides-list {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-  }
-  .preview-box {
-    font-size: 20px !important;
-  }
-}
 
+/* Custom scrollbar for sidebar */
 .sidebar__slides-list::-webkit-scrollbar {
   width: 5px;
 }
@@ -63,11 +51,17 @@ form {
   border-radius: 10px;
 }
 
+/* --- Slide Previews --- */
 .slide-preview {
   display: flex;
   gap: 10px;
   margin-bottom: 10px;
   cursor: pointer;
+}
+
+.slide-preview span {
+  max-width: 20px;
+  width: 100%;
 }
 
 .preview-box {
@@ -86,34 +80,12 @@ form {
   overflow: hidden;
 }
 
-.option-wrapper {
-  display: flex;
-  gap: 10px;
-}
-.option-input {
-  width: 100%;
-}
-.correct-indicator {
-  width: 40px;
-  background: none;
-  border: 3px solid #787;
-  cursor: pointer;
-  transition: all 0.4s ease;
-  border-radius: 8px;
-}
-
-.correct-indicator:hover {
-  background-color: #787;
-}
 .slide-preview.active .preview-box {
   border-color: #007aff;
   background: #fff;
 }
-.slide-preview span {
-  max-width: 20px;
-  width: 100%;
-}
 
+/* --- Editor Section --- */
 .quiz-creator__editor {
   flex: 1;
   display: flex;
@@ -123,6 +95,7 @@ form {
 }
 
 form {
+  flex: 0 0 100%;
   width: 80%;
   max-width: 600px;
 }
@@ -136,17 +109,25 @@ form {
   text-align: center;
   margin-bottom: 30px;
 }
+
 .question-input:focus::placeholder {
   opacity: 0;
 }
 
+/* --- Options Logic --- */
 .options-grid {
   display: flex;
   flex-direction: column;
   gap: 20px;
 }
 
+.option-wrapper {
+  display: flex;
+  gap: 10px;
+}
+
 .option-input {
+  width: 100%;
   padding: 15px;
   border: 1px solid #ccc;
   border-radius: 8px;
@@ -167,20 +148,36 @@ form {
   color: #999;
   transition: all 0.4s ease-out;
 }
-.button-create-quiz {
-  display: flex;
-  justify-content: center;
-  width: 100%;
-  margin: 20px auto;
-}
+
 .add-option-button:hover {
   border-color: #787;
   color: #787;
 }
+
+/* --- Action Buttons --- */
+.correct-indicator {
+  width: 40px;
+  background: none;
+  border: 3px solid #787;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  border-radius: 8px;
+}
+
+.correct-indicator:hover {
+  background-color: #787;
+}
+
+.correct {
+  background-color: #787 !important;
+}
+
 .button-create-quiz {
-  flex: 0 1 100%;
-  max-width: 80%;
+  display: flex;
+  justify-content: center;
   width: 100%;
+  max-width: 80%;
+  margin: 20px auto;
   background-color: #787;
   border: none;
   padding: 5px;
@@ -188,48 +185,152 @@ form {
   cursor: pointer;
   border-radius: 4px;
   transition: all 0.4s ease-in-out;
+  color: #f5f5f7;
 }
+
 .button-create-quiz:hover {
   background-color: #5a5;
 }
 
+/* --- Shared Footer Logic --- */
+.footer--quiz-editor {
+  padding-left: 275px;
+  box-sizing: border-box;
+}
+
+/* --- Responsive Media Queries --- */
 @media (max-width: 1147px) {
   .quiz-creator {
     flex-direction: column;
     background: none;
   }
+
   .quiz-creator__editor {
     background-color: #f5f5f7;
   }
+
   .sidebar {
     width: 500px;
     margin: 0 auto;
-    display: flex;
-    flex-direction: column;
     max-height: 350px;
     flex: 1 1 100%;
     border-right: none;
     border-bottom: 1px solid #ddd;
     overflow-x: auto;
   }
-  .preview-box {
-    height: 50px;
-    font-size: 10px;
+
+  .sidebar__slides-list {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
   }
+
+  .preview-box {
+    height: 40px;
+    font-size: 8px;
+  }
+
+  .preview-box {
+    font-size: 20px !important; /* Specific preview font adjustment */
+  }
+
   .slide-preview {
     flex-direction: column;
     align-items: center;
     min-width: 80px;
   }
+
   .slide-preview span {
     max-width: none;
     width: auto;
   }
-  .preview-box {
-    height: 40px;
-    font-size: 8px;
-  }
+
   .button-create-quiz {
     margin-top: 30px;
+  }
+
+  .footer--quiz-editor {
+    padding-left: 0;
+  }
+}
+/* --- Responsive Media Queries --- */
+@media (max-width: 1147px) {
+  .quiz-creator {
+    flex-direction: column;
+    background: none;
+    overflow-y: auto; /* Allow the whole page to scroll on mobile */
+  }
+
+  .sidebar {
+    width: 100%; /* Make sidebar responsive */
+    max-width: 100%;
+    margin: 0;
+    max-height: 200px; /* Smaller height for mobile view */
+    flex: 0 0 auto;
+    border-right: none;
+    border-bottom: 1px solid #ddd;
+    padding: 15px;
+  }
+
+  /* Horizontal slide list for better mobile UX */
+  .sidebar__slides-list {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    overflow-x: auto; /* Horizontal scroll for slides */
+    padding-bottom: 10px;
+  }
+
+  .slide-preview {
+    flex-direction: column;
+    align-items: center;
+    min-width: 100px; /* Fixed width for horizontal items */
+    margin-bottom: 0;
+  }
+
+  .preview-box {
+    width: 100%;
+    height: 50px;
+    font-size: 12px !important;
+  }
+
+  .quiz-creator__editor {
+    padding: 20px 10px;
+    background-color: #f5f5f7;
+    align-items: flex-start; /* Better for long forms */
+  }
+
+  form {
+    width: 90%;
+    margin: 0 auto;
+  }
+
+  .question-input {
+    font-size: 22px; /* Scale down text for small screens */
+  }
+
+  .button-create-quiz {
+    margin-top: 20px;
+    font-size: 24px;
+    max-width: 100%;
+  }
+
+  .footer--quiz-editor {
+    padding-left: 0; /* Reset sidebar offset */
+  }
+  .sidebar {
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    box-sizing: border-box;
+
+    display: flex;
+    flex-direction: column;
+  }
+
+  .add-slide-button {
+    width: 100%;
+    margin-right: 0;
+    box-sizing: border-box;
   }
 }

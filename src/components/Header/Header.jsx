@@ -1,8 +1,10 @@
+import { memo } from "react";
 import { Link } from "react-router";
 import "./Header.css";
 import logo from "../../assets/logo/favicon.png";
 
-export default function Header() {
+
+const Header = memo(() => {
   return (
     <header className="header">
       <div className="header__container">
@@ -20,4 +22,6 @@ export default function Header() {
       </div>
     </header>
   );
-}
+});
+
+export default Header;
