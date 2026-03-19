@@ -5,6 +5,7 @@ import "./Slider.css";
 import { useMemo } from "react";
 
 export default function SimpleSlider() {
+	//console.log('slider render')
   const options = useMemo(
     () => ({
       loop: true,
