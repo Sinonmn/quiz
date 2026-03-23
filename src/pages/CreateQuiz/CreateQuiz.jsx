@@ -149,7 +149,7 @@ const CreateQuiz = () => {
 
       if (data.id) {
         console.log("POST response:", data);
-        console.log("Navigate to:", `/quiz/${data.id}`);
+        console.log("Navigate to:", `/quiz/${data.id}`); //тест
         window.location.href = `/quiz/${data.id}`;
       } else {
         console.warn("Server replied without id", data);

@@ -25,7 +25,10 @@ const QuizPage = () => {
     } else {
       setFeedback("incorrect");
     }
-    setCurrentIndex((prev) => prev + 1);
+    setTimeout(() => {
+      setFeedback(null);
+      setCurrentIndex((prev) => prev + 1);
+    }, 1500);
   };
 
   const resetQuizButton = () => {
@@ -34,19 +37,23 @@ const QuizPage = () => {
   };
   const API_URL = import.meta.env.VITE_API_URL || "http://localhost:3001";
   useEffect(() => {
-    fetch(`${API_URL}/api/quiz/${id}`)
-      .then((res) => {
-        if (!res.ok) throw new Error("Квиз не найден");
-        return res.json();
-      })
-      .then((data) => {
+    const fetchQuiz = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(`${API_URL}/api/quiz/${id}`);
+        if (!response.ok) {
+          throw new Error("Quiz wasn`t found");
+        }
+        const data = await response.json();
         setQuizData(data);
+      } catch (error) {
+        console.error("error");
+      } finally {
         setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Ошибка:", err);
-        setLoading(false);
-      });
+      }
+    };
+
+    fetchQuiz();
   }, [id]);
 
   if (loading) return <div>Loading </div>;
