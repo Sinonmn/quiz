@@ -334,3 +334,14 @@ form {
     box-sizing: border-box;
   }
 }
+
+.loading-toast {
+  min-width: 250px;
+  font-size: 24px;
+  font-weight: 500;
+  padding: 20px !important;
+  background-color: #787 !important;
+  color: #fff !important;
+  border-radius: 12px !important;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2) !important;
+}

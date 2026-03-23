@@ -123,6 +123,9 @@ const CreateQuiz = () => {
     setIsSending(true);
     try {
       console.log("handleCreateQuiz start");
+      toast.loading("It takes a time...", {
+        className: "loading-toast",
+      });
       const response = await fetch(`${API_URL}/api/send`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -225,7 +228,7 @@ const CreateQuiz = () => {
             </form>
           </main>
         </div>
-        <Footer  className='footer--quiz-editor'/>
+        <Footer className="footer--quiz-editor" />
       </div>
     </>
   );
